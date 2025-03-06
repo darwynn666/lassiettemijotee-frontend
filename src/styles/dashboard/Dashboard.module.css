@@ -1,0 +1,298 @@
+/* global dashboard pages */
+
+.main {
+    height: calc(100dvh - 2 * var(--global-padding));
+    /* flex:1; */
+    overflow-y: auto;
+    padding-bottom: 30dvh;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2rem;
+    color: var(--green)
+}
+
+.smallTitleContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--green)
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.infosContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.errorMessage {
+    color: var(--red);
+    height: 25px;
+}
+
+.buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 2 * var(--global-padding));
+    background-color: var(--white);
+}
+
+/* Members */
+
+.navigationContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 calc(-1 * var(--global-padding));
+    padding: var(--global-padding);
+    border-bottom: 1px solid var(--lightgray);
+}
+
+.timesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.membersListContainer {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.memberContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 calc(-1 * var(--global-padding));
+    padding: var(--global-padding);
+    border-bottom: 1px solid var(--lightgray);
+}
+
+.memberLeft {
+    cursor: pointer;
+}
+
+.memberRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Filters */
+
+.filtersContainer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    margin: 0 calc(-1 * var(--global-padding));
+    padding: var(--global-padding);
+    width: calc(100% - 2 * var(--global-padding));
+}
+
+.filtersOpenedContainer {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--lightgray);
+}
+
+.filtersOpenedContainer div {
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    flex-grow: 1;
+}
+
+.filtersOpenedContainer button {
+    width: 30%;
+}
+
+.filtersOpenedContainer input {
+    width: 100%;
+    margin-right: 5px;
+}
+
+.filtersClosedContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Pendings */
+
+.pendingMembersContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-top: 30px;
+}
+
+.pendingMember {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /* background-color: var(--red); */
+    border: 1px solid var(--lightgray);
+    border-radius: 5px;
+    margin: 10px;
+    width: 120px;
+    /* height: 120px; */
+    /* color: white; */
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pendingMember span {
+    margin: var(--global-padding) 0;
+}
+
+.pendingsEmptyContainer {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+/* Register */
+
+.typesContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.typeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.priceContainer {
+    display: flex;
+    justify-content: center;
+}
+
+/* Edit */
+
+.membershipsHeaders {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+
+.membershipsContainer {
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: auto; */
+}
+
+.membershipContainer {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.columnLeft {
+    flex: 2;
+}
+
+.columnRight {
+    flex: 1;
+    text-align: right;
+}
+
+/* Settings */
+
+.weekMenuContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.weekMenuLeft {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.weekMenuRight {
+    display: flex;
+}
+
+.weekMenuImg {
+    width: 25dvw;
+}
+
+.amountsContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.amountContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amountContainer input {
+    width: 30px;
+    text-align: center;
+}
+
+/* Mailing */
+
+.groupContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: white;
+    border: 1px solid var(--lightgray);
+    border-radius: 5px;
+    padding: var(--global-padding);
+    margin: 20px 0;
+}
+
+.labelContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--global-padding);
+    /* color:var(--lightgray) */
+}
+
+.typesContainer {
+    display: flex;
+    justify-content: space-around;
+}
+
+.typesContainer div {
+    display: flex;
+    flex-direction: column;
+}
+
+.mailingButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.mailingButton * {
+    margin: 0 10px;
+}

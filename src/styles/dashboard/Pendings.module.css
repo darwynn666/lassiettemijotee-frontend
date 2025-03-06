@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding: 5px;
+    margin-left: calc(var(--global-padding) * -1);
+    margin-right: calc(var(--global-padding) * -1);
+    margin-top: calc(var(--global-padding) * -1);
+}

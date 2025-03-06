@@ -1,0 +1,25 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-left: calc(var(--global-padding) * -1);
+    margin-right: calc(var(--global-padding) * -1);
+    margin-top: calc(var(--global-padding) * -1);
+}
+
+.pendingsContainer {
+    display: flex;
+    align-items: flex-end;
+    color: white;
+}
+
+.pendingBadge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: var(--red);
+    border-radius: 20px;
+    margin-left:-5px;
+}

@@ -1,0 +1,24 @@
+.main {
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--lightgray);
+    background-color: white;
+    /* padding:var(--global-padding); */
+}
+
+.labelContainer {
+    padding: var(--global-padding);
+    background-color: var(--green);
+    color: white;
+}
+
+.citiesContainer {
+    max-height: 150px;
+    overflow-y: auto
+}
+
+.cityContainer {
+    padding: var(--global-padding);
+    cursor: pointer;
+}

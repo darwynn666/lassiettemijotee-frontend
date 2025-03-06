@@ -3,13 +3,6 @@
     flex-direction: column;
     justify-content:space-between;
     height:calc(100dvh - 2 * var(--global-padding));
-    /* height:100%; */
-}
-
-.headerContainer {
-    display: flex;
-    justify-content: flex-end;
-    padding:10px;
 }
 
 .titleContainer {
@@ -17,15 +10,19 @@
     flex-direction: column;
     text-align: center;
     font-size: 2rem;
+    color:var(--orange)
 }
 
-.logoContainer {
-    display: flex;
+.menuContainer {
+    display:flex;
+    flex-direction: column;
     justify-content: center;
+    cursor:pointer;
+    text-align: center;
 }
 
-.logo {
-    width:60vw;
+.menu {
+    height:70vw;
 }
 
 .infosContainer {
