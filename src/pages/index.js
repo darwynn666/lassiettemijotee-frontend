@@ -22,7 +22,7 @@ export default function Home() {
         <div className={styles.headerContainer}>
           <span className='pointer'>
             <Link href='dashboard/Members'>
-              <WebServiceStatus className='text-s'/>
+              <WebServiceStatus display={false} />
               <FontAwesomeIcon icon={faUtensils} className='text-xxl dashboardLink' />
             </Link>
           </span>
