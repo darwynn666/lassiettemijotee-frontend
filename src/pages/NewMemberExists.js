@@ -25,7 +25,7 @@ export default function NewMemberExists() {
                 </div>
 
                 <div className={styles.infosContainer}>
-                    <span>Une adhésion (ou demande d'adhésion) existe déjà pour cette adresse mail cette année ({email.toLowerCase()}).</span>
+                    <span>Une adhésion (ou demande d'adhésion) existe déjà pour cette adresse mail cette année ({email?.toLowerCase()}).</span>
                     <span>Dirigez-vous en caisse pour régler votre cotisation si ce n'est pas déjà fait ou patientez l'année prochaine pour renouveler votre adhésion !</span>
                 </div>
 
