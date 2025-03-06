@@ -79,7 +79,7 @@ export default function Signin() {
                 </div>
 
                 <div className={styles.infosContainer}>
-                    <span>Status du Web Service</span> <WebServiceStatus className='text-xxl'/>
+                    <span>Web Service</span> <WebServiceStatus className='text-xxl'/>
                 </div>
 
                 <div className={styles.buttonsContainer}>

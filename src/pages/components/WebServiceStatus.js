@@ -11,19 +11,30 @@ export default function WebServiceStatus(props) {
     const { className } = props
 
     const [status, setStatus] = useState(false)
+    const [refreshTrigger,setRefreshTrigger]=useState(true)
 
-    const getStatus = async () => {
+    // get backend status
+    const getBackendStatus = async () => {
         const url = `${API_URL}/settings/wakeup`
-        console.log('GET', url)
+        // console.log('GET', url)
         const response = await fetch(url)
         const data = await response.json()
-        console.log('getStatus()', data)
+        // console.log('getStatus()', data)
         if(data.online) setStatus(true)
     }
 
+    // initialize refresh interval
     useEffect(() => {
-        getStatus()
+        const i = setInterval(() => { setRefreshTrigger((trigger) => !trigger) }, 10_000)
+        return () => clearInterval(i)
     }, [])
+
+    // try to get status at every changes of refreshTrigger
+    useEffect(() => {
+        // console.log('getPendings()', refreshTrigger)
+        getBackendStatus()
+    }, [refreshTrigger])
+
 
 
     return (

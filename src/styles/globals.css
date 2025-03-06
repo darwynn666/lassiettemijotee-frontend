@@ -91,6 +91,10 @@ a {
   cursor: pointer;
 }
 
+.text-s {
+  font-size: 0.5rem;
+}
+
 .text-m {
   font-size: 1rem;
 }
