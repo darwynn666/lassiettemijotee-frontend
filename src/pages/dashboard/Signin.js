@@ -48,7 +48,7 @@ export default function Signin() {
             // console.log('response', response)
             if (response.error) { setErrorMessage(response.error) }
             else {
-                console.log('connected, redir to', redirToPage, response)
+                // console.log('connected, redir to', redirToPage, response)
                 router.push({ pathname: redirToPage })
             }
             dispatch(setAuth(response.auth))
