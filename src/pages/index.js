@@ -1,7 +1,8 @@
+import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "@/styles/Home.module.css";
 import SiteHead from "./components/SiteHead";
+import WebServiceStatus from "./components/WebServiceStatus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
@@ -9,7 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
 
-  
+
 
 
 
@@ -21,6 +22,7 @@ export default function Home() {
         <div className={styles.headerContainer}>
           <span className='pointer'>
             <Link href='dashboard/Members'>
+              <WebServiceStatus className='text-m'/>
               <FontAwesomeIcon icon={faUtensils} className='text-xxl dashboardLink' />
             </Link>
           </span>

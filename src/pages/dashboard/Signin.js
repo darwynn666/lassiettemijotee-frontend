@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "@/styles/dashboard/Signin.module.css";
 import SiteHead from "../components/SiteHead";
+import WebServiceStatus from "../components/WebServiceStatus";
 import { useState, useEffect } from "react";
 import { fetchLoginAdmin } from "@/features/auth/authAPI";
 import { setAuth, logout } from "@/features/auth/authSlice";
@@ -69,12 +70,16 @@ export default function Signin() {
                 </div>
 
                 <div className={styles.infosContainer}>
-                    <span>Saisissez le mot de passe restaurateur pour accéder aux fonctionnalités avancées.</span>
+                    <span>Saisissez le mot de passe restaurateur pour accéder aux fonctionnalités avancées</span>
                 </div>
 
                 <div className={styles.formContainer}>
-                    <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' className='input' placeholder='password' />
+                    <input onChange={(e) => setPassword(e.target.value)} value={password} type='password' className='input' placeholder='mot de passe restaurateur' />
                     <div className={styles.errorMessage}>{errorMessage}</div>
+                </div>
+
+                <div className={styles.infosContainer}>
+                    <span>Status du Web Service</span> <WebServiceStatus className='text-xxl'/>
                 </div>
 
                 <div className={styles.buttonsContainer}>
