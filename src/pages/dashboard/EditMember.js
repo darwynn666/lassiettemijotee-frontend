@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faToggleOn, faToggleOff, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import useAuthRedirect from '@/features/auth/useAuthRedirect'
 import { getDateRange, toShortString } from '@/features/utils/utils'
-import { setDateSlice, setPeriodSlice, setTypesSlice } from '@/features/filters/filtersSlice'
 import { fetchGetUserById, fetchSetUser, fetchDeleteUser } from '@/features/users/usersAPI'
 import { fetchPrices } from '@/features/settings/settingsAPI'
 import { trackSynchronousPlatformIOAccessInDev } from 'next/dist/server/app-render/dynamic-rendering'

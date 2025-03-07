@@ -18,7 +18,6 @@ export default function Members() {
     const router = useRouter()
     const auth = useSelector((state) => state.auth.value)
 
-    // console.log('filtersSlice', filtersSlice)
 
 
     const [members, setMembers] = useState([])
