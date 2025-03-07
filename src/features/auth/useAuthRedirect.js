@@ -16,7 +16,7 @@ export default function useAuthRedirect() {
                 return
             }
             const isValid = await fetchVerifyToken(auth)
-            console.log('Token', auth.token)
+            // console.log('Token', auth.token)
             if (!isValid) {
                 router.push("/dashboard/Signin")
                 return
