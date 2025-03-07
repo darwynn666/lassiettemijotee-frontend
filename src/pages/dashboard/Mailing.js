@@ -1,6 +1,5 @@
 import styles from '@/styles/dashboard/Dashboard.module.css'
 import Header from './components/Header'
-import Pendings from './components/Pendings'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
@@ -62,7 +61,7 @@ export default function Mailing() {
 
     // onClick button functions
     const selectEmails = (action) => {
-        console.log('open mail client')
+        // console.log('open mail client')
         // console.log(selectedTypes, users)
         const emailList = users
             .filter(user => user.memberships.some(m => selectedTypes.includes(m.type)))
@@ -71,27 +70,19 @@ export default function Mailing() {
         console.log(emailList)
 
         if (action === 'send') { // open mail client
-            console.log('send')
+            // console.log('send')
             window.location.replace(`mailto:?bcc=${emailList}`)
         }
         if (action === 'copy') { // copy to clipboard
-            console.log('copy')
+            // console.log('copy')
             copyToClipboard(emailList)
             alert('Mails copiés, rendez-vous dans votre application de messagerie et collez-les dans le champ "Cci:" (copie conforme invisible). \n\nNe les copiez pas dans le champ "To:" sinon chaque destinataire aura accès à la liste de mails.')
         }
     }
 
-    // const copyMails = () => { // click on 'COPIER'
-    //     console.log('copy mails')
-    //     const emailList = users.map(e => e.email).join(';')
-    //     // console.log(emailList)
-    //     copyToClipboard(emailList)
-    //     alert('Mails copiés, rendez-vous dans votre application de messagerie et collez-les dans le champ "Cci:" (copie conforme invisible). \n\nNe les copiez pas dans le champ "To:" sinon chaque destinataire aura accès à la liste de mails.')
-    // }
-
 
     const downloadUsers = () => {
-        console.log('download users')
+        // console.log('download users')
         const csvRows = []
         csvRows.push(['id', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Ville', 'Adhésions réglées', 'Adhésions non réglées'].join(';'))
         users.forEach(u => {
@@ -127,7 +118,7 @@ export default function Mailing() {
         createAndDownloadCSV('adhesions.csv', csvString)
     }
 
-    console.log('users', users)
+    // console.log('users', users)
 
     return (
         <>

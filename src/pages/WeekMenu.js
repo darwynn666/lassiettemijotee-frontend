@@ -28,7 +28,7 @@ export default function WeekMenu() {
 
                 <div className={styles.menuContainer}>
                     <Link href={`${MENU_IMAGE_URL}?${new Date().getTime()}`}>
-                        <img src={`${MENU_IMAGE_URL}?${new Date().getTime()}`} className={styles.menu}></img>
+                        <img src={`${MENU_IMAGE_URL}?${new Date().getTime()}`} className={styles.menu} alt='Menu'></img>
                     </Link>
                 </div>
 

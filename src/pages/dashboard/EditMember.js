@@ -1,6 +1,5 @@
 import styles from '@/styles/dashboard/Dashboard.module.css'
 import Header from './components/Header'
-import Pendings from './components/Pendings'
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'

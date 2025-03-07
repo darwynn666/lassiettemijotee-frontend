@@ -2,6 +2,7 @@ import styles from "@/styles/NewMember.module.css";
 import Link from "next/link";
 import SiteHead from "./components/SiteHead";
 import { useRouter } from "next/router";
+import { API_URL } from "@/features/utils/utils";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faUtensils } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +23,7 @@ export default function NewMemberRenew() {
                 </div>
 
                 <div className={styles.imageContainer}>
-                    <img src='trophee.png' className={styles.image}/>
+                    <img src='/images/trophee.png' className={styles.image} alt='Merci'/>
                 </div>
 
                 <div className={styles.infosContainer}>

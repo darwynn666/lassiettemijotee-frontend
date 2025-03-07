@@ -1,8 +1,7 @@
 import styles from '@/styles/dashboard/Dashboard.module.css'
 import Header from './components/Header'
-import Pendings from './components/Pendings'
 import Link from 'next/link'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import { API_URL } from '@/features/utils/utils'
@@ -10,9 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight, faSliders, faPlus, faXmark, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import useAuthRedirect from '@/features/auth/useAuthRedirect'
 import { getDateRange, toShortString } from '@/features/utils/utils'
-import { setDateSlice, setPeriodSlice, setTypesSlice } from '@/features/filters/filtersSlice'
 import { fetchGetFilteredMembers } from '@/features/users/usersAPI'
-
+// todo : remove pendings component from all files
 
 
 export default function Members() {
@@ -20,48 +18,32 @@ export default function Members() {
     const router = useRouter()
     const auth = useSelector((state) => state.auth.value)
 
-    const filtersSlice = useSelector(state => state.filters.value)
     // console.log('filtersSlice', filtersSlice)
 
-    const dispatch = useDispatch()
 
     const [members, setMembers] = useState([])
-    const [period, setPeriod] = useState(null)
+    const [period, setPeriod] = useState('week')
     const [periodString, setPeriodString] = useState('-')
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
+
     const [displayFilters, setDisplayFilters] = useState(false)
-    const [filterClients, setFilterClients] = useState(true)
-    const [filterVolunteers, setFilterVolunteers] = useState(true)
-    const [filterEmployees, setFilterEmployees] = useState(true)
-    const [filterExternals, setFilterExternals] = useState(true)
+    const [filterTypes, setFilterTypes] = useState(['client', 'volunteer', 'employee', 'external'])
+
     const [searchString, setSearchString] = useState(null)
 
-    // get filters from reducer at first render
-    useEffect(() => {
-        if (filtersSlice) {
-            // console.log('filters reducer', filtersSlice)
-            setStartDate(new Date(filtersSlice.date))
-            setPeriod(filtersSlice.period)
-            setFilterClients(filtersSlice.types.includes('client'))
-            setFilterVolunteers(filtersSlice.types.includes('volunteer'))
-            setFilterEmployees(filtersSlice.types.includes('employee'))
-            setFilterExternals(filtersSlice.types.includes('external'))
-            // console.log(filtersSlice.types)
+    // get members filtered (period, types)
+    const getMembers = async () => {
+        const membersResult = await fetchGetFilteredMembers(auth.token, startDate, endDate, filterTypes)
+        if (!membersResult.error) {
+            // console.log('getMembers() inputs', period, startDate, endDate, types)
+            // console.log('getMembers() response', membersResult)
+            setMembers(membersResult || [])
         }
-    }, [])
-
-    useEffect(() => {
-        if (filtersSlice) {
-            const types = []
-            filterClients && types.push('client')
-            filterVolunteers && types.push('volunteer')
-            filterEmployees && types.push('employee')
-            filterExternals && types.push('external')
-            dispatch(setTypesSlice(types))
-            // console.log('setTypesSlice', types, filtersSlice)
+        else {
+            console.log('getMembers() error', membersResult)
         }
-    }, [filterClients, filterVolunteers, filterEmployees, filterExternals])
+    }
 
     // get initial dates
     useEffect(() => {
@@ -69,61 +51,36 @@ export default function Members() {
         // console.log(dateRange)
         setStartDate(dateRange.startDate)
         setEndDate(dateRange.endDate)
-        dispatch(setPeriodSlice(period))
-        // console.log('filtersSlice',filtersSlice)
     }, [period])
 
-    // changes period display
     useEffect(() => {
         const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
         if (period === 'week') setPeriodString(toShortString(startDate) + ' - ' + toShortString(new Date(endDate.getTime() - 1000)))
         if (period === 'month') setPeriodString(monthNames[startDate.getMonth()] + ' ' + startDate.getFullYear())
         if (period === 'year') setPeriodString(startDate.getFullYear())
-        // console.log('periodString', periodString)
-        dispatch(setDateSlice(startDate.toISOString()))
-        // console.log('filtersSlice',filtersSlice)
-    }, [startDate, endDate])
-
-    useEffect(() => {
         getMembers()
-    }, [filtersSlice])
+    }, [startDate,filterTypes])
 
-    // get members filtered (period, types)
-    const getMembers = async () => {
-        const types = []
-        filterClients && types.push('client')
-        filterVolunteers && types.push('volunteer')
-        filterEmployees && types.push('employee')
-        filterExternals && types.push('external')
-        const membersResult = await fetchGetFilteredMembers(auth.token, startDate, endDate, types)
-        if (membersResult) {
-            // console.log('getMembers() success', membersResult)
-            setMembers(membersResult || [])
-        }
-        else {
-            console.log('getMEmbers() error', membersResult)
-        }
-    }
 
 
     // set a new display period
-    const handleNavigatePeriod = (sign) => {
+    const handleNavigatePeriod = (inc) => {
         let dateRange = {}
         if (period === 'week') {
             const newDate = new Date(startDate)
-            newDate.setDate(startDate.getDate() + (sign * 7))
+            newDate.setDate(startDate.getDate() + (inc * 7))
             // console.log(newDate)
             dateRange = getDateRange(newDate, period)
         }
         if (period === 'month') {
             const newDate = new Date(startDate)
-            newDate.setMonth(startDate.getMonth() + (sign * 1))
+            newDate.setMonth(startDate.getMonth() + (inc * 1))
             // console.log(newDate)
             dateRange = getDateRange(newDate, period)
         }
         if (period === 'year') {
             const newDate = new Date(startDate)
-            newDate.setYear(startDate.getFullYear() + (sign * 1))
+            newDate.setYear(startDate.getFullYear() + (inc * 1))
             // console.log(newDate)
             dateRange = getDateRange(newDate, period)
         }
@@ -131,6 +88,13 @@ export default function Members() {
             setStartDate(dateRange.startDate)
             setEndDate(dateRange.endDate)
         }
+    }
+
+    // toggle type in filterTypes array (push or slice)
+    const toggleType = (type) => {
+        const f = [...filterTypes]
+        f.includes(type) ? f.splice(f.indexOf(type), 1) : f.push(type)
+        setFilterTypes(f)
     }
 
     // filter the view by name, mail or city (no db query)
@@ -144,7 +108,7 @@ export default function Members() {
             )
                 return m
         })
-        console.log(searchedMembers)
+        // console.log(searchedMembers)
         if (searchedMembers.length > 0) setMembers(searchedMembers)
     }
 
@@ -212,10 +176,10 @@ export default function Members() {
                                 <FontAwesomeIcon onClick={() => setDisplayFilters(false)} icon={faXmark} className='text-xxl pointer fg-green' />
                             </div>
                             <div>
-                                <button onClick={() => setFilterClients(!filterClients)} className={`smallButton ${filterClients ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Clients</button>
-                                <button onClick={() => setFilterVolunteers(!filterVolunteers)} className={`smallButton ${filterVolunteers ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Bénévoles</button>
-                                <button onClick={() => setFilterEmployees(!filterEmployees)} className={`smallButton ${filterEmployees ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Employés</button>
-                                <button onClick={() => setFilterExternals(!filterExternals)} className={`smallButton ${filterExternals ? 'bg-green' : 'bg-lightgray'}`}>Externes</button>
+                                <button onClick={() => toggleType('client')} className={`smallButton ${filterTypes.includes('client') ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Clients</button>
+                                <button onClick={() => toggleType('volunteer')} className={`smallButton ${filterTypes.includes('volunteer') ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Bénévoles</button>
+                                <button onClick={() => toggleType('employee')} className={`smallButton ${filterTypes.includes('employee') ? 'bg-green' : 'bg-lightgray'}`} style={{ marginRight: '5px' }}>Employés</button>
+                                <button onClick={() => toggleType('external')} className={`smallButton ${filterTypes.includes('external') ? 'bg-green' : 'bg-lightgray'}`}>Externes</button>
                             </div>
                             <div>
                                 <button onClick={() => setPeriod('week')} className={`smallButton ${period === 'week' ? 'bg-green' : 'bg-lightgray'}`}>Semaine</button>

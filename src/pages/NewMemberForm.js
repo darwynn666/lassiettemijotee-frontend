@@ -31,7 +31,7 @@ export default function NewMemberForm() {
   }, [])
 
   const selectCity = (city) => {
-    console.log('select', city)
+    // console.log('select', city)
     setCity(city)
     setCitySelected(true)
   }
@@ -69,7 +69,7 @@ export default function NewMemberForm() {
     }
   }
 
-  console.log(city, citySelected)
+  // console.log(city, citySelected)
 
   return (
     <>

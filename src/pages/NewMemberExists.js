@@ -21,7 +21,7 @@ export default function NewMemberExists() {
                 </div>
 
                 <div className={styles.imageContainer}>
-                    <img src='sablier.png' className={styles.image}/>
+                    <img src='/images/sablier.png' className={styles.image} alt='Patientez...'/>
                 </div>
 
                 <div className={styles.infosContainer}>

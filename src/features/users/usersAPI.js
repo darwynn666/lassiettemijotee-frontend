@@ -107,7 +107,7 @@ export const fetchCancelNewMembership = async (token, userIndex, membershipIndex
         })
         const data = await response.json()
         if (response.status === 200) {
-            console.log('fetchCancelNewMembership() success', data)
+            // console.log('fetchCancelNewMembership() success', data)
             return true
         }
         else {

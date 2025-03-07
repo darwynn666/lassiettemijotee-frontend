@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 
 export default function CityAutocomplete(props) {
     const { filter } = props
-    console.log(filter)
+    // console.log(filter)
 
     const router = useRouter()
 
@@ -17,7 +17,7 @@ export default function CityAutocomplete(props) {
         const getCities = async () => {
             // https://geo.api.gouv.fr/communes?nom=lille&format=json
             const url = `https://geo.api.gouv.fr/communes?nom=${encodeURI(filter)}&boost=population&limit=3&format=json`
-            console.log('GET', url)
+            // console.log('GET', url)
             const response = await fetch(url)
             const cities = await response.json()
             // console.log(cities)
@@ -41,7 +41,7 @@ export default function CityAutocomplete(props) {
         )
     })
 
-    console.log(cities)
+    // console.log(cities)
 
     if (!cities.length) return
 

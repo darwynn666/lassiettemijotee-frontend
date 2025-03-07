@@ -23,7 +23,7 @@ export default function NewMemberOk() {
                 </div>
 
                 <div className={styles.imageContainer}>
-                    <img src='trophee.png' className={styles.image}/>
+                    <img src='/images/trophee.png' className={styles.image} alt='Merci'/>
                 </div>
 
                 <div className={styles.infosContainer}>
