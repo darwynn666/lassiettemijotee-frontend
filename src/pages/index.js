@@ -34,7 +34,7 @@ export default function Home() {
         </div>
 
         <div className={styles.logoContainer}>
-          <img src='logo.png' className={styles.logo} alt='Logo'></img>
+          <img src='/images/logo.png' className={styles.logo} alt='Logo'></img>
         </div>
 
         <div className={styles.infosContainer}>
