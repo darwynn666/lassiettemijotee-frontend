@@ -8,7 +8,7 @@ import { API_URL } from '@/features/utils/utils'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope, faCopy, faDownload, faToggleOn, faToggleOff } from "@fortawesome/free-solid-svg-icons";
 import useAuthRedirect from '@/features/auth/useAuthRedirect'
-import { fetchGetAllUsers } from '@/features/users/usersAPI'
+import { fetchGetAllUsers, fetchGetDatabase } from '@/features/users/usersAPI'
 
 
 export default function Mailing() {
@@ -23,6 +23,12 @@ export default function Mailing() {
         const result = await fetchGetAllUsers(auth.token)
         if (result) setUsers(result)
     }
+
+    // const getDatabase = async () => {
+    //     const result = await fetchGetDatabase(auth.token)
+    //     if (result) console.log('getDatabase() success', result)
+    //     else console.log('getDatabase() error', result)
+    // }
 
     useEffect(() => {
         getUsers()
@@ -118,6 +124,33 @@ export default function Mailing() {
         createAndDownloadCSV('adhesions.csv', csvString)
     }
 
+    const downloadDatabase = async () => {
+        console.log('download database')
+
+        try {
+            const url = `${API_URL}/settings/getdbfile`
+            console.log('GET', url)
+            const response = await fetch(url, {
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer <${auth.token}>` },
+            })
+            if (!response.ok) throw new Error("Erreur lors du téléchargement");
+            // Créer un Blob et déclencher le téléchargement
+            const blob = await response.blob();
+            const aUrl = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = aUrl;
+            a.download = "lassiettemijotee.sqlite"; // Nom du fichier
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(aUrl);
+        }
+        catch (err) {
+            console.log('downloadDatabase() error', err)
+        }
+
+    }
+
     // console.log('users', users)
 
     return (
@@ -205,6 +238,20 @@ export default function Mailing() {
                         <button onClick={() => downloadMemberships()} className='button bg-green w-full'>
                             <FontAwesomeIcon icon={faDownload} className='text-xxl pointer' />
                             <span>TELECHARGER ADHESIONS</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className={styles.groupContainer}>
+                    <div>
+                        <span className={styles.labelContainer}>
+                            Sauvegarder la base de données (.sqlite)
+                        </span>
+                    </div>
+                    <div>
+                        <button onClick={() => downloadDatabase()} className='button bg-red w-full'>
+                            <FontAwesomeIcon icon={faDownload} className='text-xxl pointer' />
+                            <span>TELECHARGER BDD</span>
                         </button>
                     </div>
                 </div>
