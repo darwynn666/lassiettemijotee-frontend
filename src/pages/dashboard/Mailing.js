@@ -134,6 +134,7 @@ export default function Mailing() {
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer <${auth.token}>` },
             })
             if (!response.ok) throw new Error("Erreur lors du téléchargement");
+            // console.log(response)
             // Créer un Blob et déclencher le téléchargement
             const blob = await response.blob();
             const aUrl = window.URL.createObjectURL(blob);
